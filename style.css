@@ -1,0 +1,106 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:#000;
+color:#fff;
+}
+
+.hero{
+height:100vh;
+background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.8)),
+url("assets/images/couple1.jpg");
+background-size:cover;
+background-position:center;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+
+.overlay{
+padding:20px;
+}
+
+h1{
+font-family:'Cinzel',serif;
+font-size:55px;
+color:#FFD700;
+}
+
+h2{
+font-family:'Cinzel',serif;
+color:#FFD700;
+margin:20px 0;
+}
+
+h3{
+color:#fff;
+margin-bottom:10px;
+}
+
+.heart{
+font-size:45px;
+color:red;
+margin:15px 0;
+animation:pulse 1.5s infinite;
+}
+
+.btn{
+display:inline-block;
+padding:15px 35px;
+background:#FFD700;
+color:#000;
+text-decoration:none;
+border-radius:40px;
+margin-top:25px;
+font-weight:bold;
+}
+
+section{
+padding:70px 20px;
+text-align:center;
+}
+
+.card{
+background:#111;
+padding:25px;
+margin:20px auto;
+max-width:400px;
+border:1px solid gold;
+border-radius:15px;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+padding-top:30px;
+}
+
+.gallery img{
+width:100%;
+border-radius:15px;
+transition:.4s;
+}
+
+.gallery img:hover{
+transform:scale(1.05);
+}
+
+footer{
+padding:40px;
+text-align:center;
+background:#111;
+color:#FFD700;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.2);}
+100%{transform:scale(1);}
+}
