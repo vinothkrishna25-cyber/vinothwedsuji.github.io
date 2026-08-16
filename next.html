@@ -7,140 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    /* Use the couple image as the full-page background and remove maroon/white backgrounds */
-    html, body {
-      height: 100%;
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-
-    body {
-      /* full-page background image */
-      background-image: url('assets/couple5.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      color: #ffffff; /* default text color for contrast */
-      position: relative;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      min-height: 100vh;
-    }
-
-    /* dark overlay across the entire page to keep text readable */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.35);
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* keep hero transparent (no separate maroon background) */
-    .hero{
-      min-height:320px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      color:inherit;
-      position:relative;
-      z-index: 1; /* above the page overlay */
-      padding: 48px 16px;
-    }
-
-    /* hero overlay for slightly stronger contrast in the hero area */
-    .hero::before{
-      content:'';
-      position:absolute;
-      inset:0;
-      background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.35));
-      z-index:0;
-      pointer-events:none;
-    }
-
-    .hero-content{position:relative;z-index:1}
-    #timer{font-family: 'Playfair Display', Georgia, serif;font-size:20px;display:inline-block;padding:12px 18px;background:rgba(255,255,255,0.06);border-radius:12px;color:#fff}
-
-    /* Button group for details */
-    .btn-group{
-      display:inline-flex;
-      gap:10px;
-      margin-top:18px;
-    }
-    .detail-btn{
-      appearance:none;
-      -webkit-appearance:none;
-      background: rgba(255,255,255,0.08);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.12);
-      padding:10px 14px;
-      border-radius:8px;
-      cursor:pointer;
-      font-weight:600;
-      transition: background 220ms ease, transform 160ms ease;
-    }
-    .detail-btn:hover{ background: rgba(255,255,255,0.12); transform: translateY(-2px); }
-    .detail-btn[aria-pressed="true"]{ background: #ffdca3; color:#3b2a1a; border-color: rgba(0,0,0,0.12); }
-
-    /* Make the container transparent so the background image shows through */
-    .container{
-      max-width:760px;
-      margin:24px auto;
-      padding:24px;
-      background: transparent; /* removed white card background */
-      border-radius:10px;
-      /* keep a subtle shadow to lift content slightly if desired */
-      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-      color: #ffffff; /* ensure readable text */
-      position: relative;
-      z-index: 1; /* above the page overlay */
-      backdrop-filter: none;
-    }
-
-    /* Details panels (fallback CSS-only animation) */
-    .details-panel{
-      overflow: hidden;
-      max-height: 0;
-      opacity: 0;
-      transform: translateY(-6px);
-      transition: max-height 450ms cubic-bezier(.2,.9,.2,1), opacity 300ms ease, transform 300ms ease, padding 300ms ease;
-      background: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.12));
-      border-radius:8px;
-      margin-top:14px;
-      padding: 0 14px;
-    }
-    .details-panel.active{
-      opacity: 1;
-      transform: translateY(0);
-      max-height: 600px; /* large enough to show content */
-      padding: 14px;
-    }
-
-    /* When GSAP is available we will apply a subtle blur/backdrop to the panel for a polished look */
-    .details-panel.gsap-ready{ background: rgba(0,0,0,0.28); backdrop-filter: blur(6px); }
-
-    h1{margin-top:0;font-family:'Playfair Display', Georgia, serif;font-size:28px}
-    h2{font-family:'Playfair Display', Georgia, serif}
-    p{font-size:16px;line-height:1.5;color:rgba(255,255,255,0.95)}
-    .btn{display:inline-block;padding:10px 16px;background:#ffdca3;color:#3b2a1a;border-radius:8px;text-decoration:none;font-weight:600}
-    .muted{color:rgba(255,255,255,0.85);margin-top:12px}
-    section + section{margin-top:18px}
-    ul{margin:8px 0 0 20px;padding:0}
-    a.btn:focus, .btn:focus {outline:3px solid rgba(255,220,163,0.5); outline-offset:3px}
-
-    @media (prefers-color-scheme: dark) {
-      /* keep behavior the same; page already darkened by overlay */
-    }
-
-    /* Page enter/exit animations (kept from original file) */
-    @keyframes pageEnter { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0);} }
-    @keyframes pageExit  { from { opacity: 1; transform: translateY(0);} to { opacity: 0; transform: translateY(-10px);} }
-    html, body { animation: pageEnter 0.6s ease-out; }
-
-  </style>
+  <link rel="preload" href="assets/couple5.jpg" as="image">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Hero with countdown -->
@@ -203,28 +71,16 @@
       <p class="muted">For questions, email: <a href="mailto:vinothkrishna25@gmail.com" style="color:inherit; text-decoration:underline;">vinothkrishna25@gmail.com</a></p>
     </section>
 
-    <p style="margin-top:18px"><a href="index.html" class="btn back-btn" style="background:#d9b4a6">Back</a></p>
   </main>
 
   <script src="script.js"></script>
-  <!-- GSAP CDN for polished springy animations (used when available) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-+8xqI2r2oGmV0q5E1L4oQK6qz4kQ9fL5rXq8R2zQGmYQm6m4F5jv6k1l2H3b7p9Z0Y8h3+Q1Z2X3Y4Z5A6B7C==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
-    // Add page exit animation when clicking back button
-    document.querySelector('.back-btn').addEventListener('click', function(e) {
-      e.preventDefault();
-      document.documentElement.style.animation = 'pageExit 0.4s ease-out forwards';
-      setTimeout(() => {
-        window.location.href = this.href;
-      }, 400);
-    });
-
     (function(){
       const buttons = Array.from(document.querySelectorAll('.detail-btn'));
       const panels = Array.from(document.querySelectorAll('.details-panel'));
       let activeId = null;
 
-      // Utility: fallback DOM toggle (CSS-only)
       function fallbackShow(id){
         panels.forEach(p => {
           if(p.id === id){
@@ -235,17 +91,13 @@
         activeId = id;
       }
 
-      // If GSAP is available, use it for buttery animations. Otherwise, use CSS fallback.
       const useGSAP = typeof window.gsap !== 'undefined' && typeof window.gsap.to === 'function';
 
       if(useGSAP){
-        // mark panels as gsap-ready for a slightly different style
         panels.forEach(p => p.classList.add('gsap-ready'));
 
         function gsapShow(id){
-          // If clicking the already active tab -> collapse
           if(activeId === id){
-            // collapse current
             const cur = document.getElementById(activeId);
             if(cur){
               gsap.to(cur, {height:0, opacity:0, y:-8, duration:0.45, ease:'power2.inOut', onComplete(){ cur.style.display='none'; cur.setAttribute('aria-hidden','true'); }});
@@ -258,43 +110,35 @@
           const newPanel = document.getElementById(id);
           const oldPanel = activeId ? document.getElementById(activeId) : null;
 
-          // collapse old
           if(oldPanel){
             gsap.to(oldPanel, {height:0, opacity:0, y:-8, duration:0.35, ease:'power2.inOut', onComplete(){ oldPanel.style.display='none'; oldPanel.setAttribute('aria-hidden','true'); }});
           }
 
-          // prepare new
           newPanel.style.display = 'block';
           newPanel.style.height = 'auto';
           const autoH = newPanel.clientHeight + 'px';
           newPanel.style.height = '0px';
           newPanel.setAttribute('aria-hidden','false');
 
-          // animate to auto height + content
           gsap.to(newPanel, {height: autoH, duration: 0.6, ease: 'power3.out'});
           gsap.fromTo(newPanel, {opacity:0, y:10}, {opacity:1, y:0, duration:0.5, ease:'power3.out', delay:0.06});
 
-          // animate inner children stagger for polish
           const children = Array.from(newPanel.children);
           gsap.fromTo(children, {opacity:0, y:6}, {opacity:1, y:0, duration:0.45, stagger:0.06, delay:0.12, ease:'power3.out'});
 
           buttons.forEach(b => b.setAttribute('aria-pressed', b.dataset.target === id ? 'true' : 'false'));
           activeId = id;
 
-          // after animation, set height to auto to allow responsive changes
           setTimeout(() => { newPanel.style.height = 'auto'; }, 700);
         }
 
-        // wire events
         buttons.forEach(b => {
           b.addEventListener('click', () => gsapShow(b.dataset.target));
           b.addEventListener('keyup', (e) => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); gsapShow(b.dataset.target); }});
         });
 
-        // open from hash or default
         const hash = location.hash.replace('#','');
         if(hash && panels.some(p=>p.id===hash)){
-          // ensure others hidden
           panels.forEach(p=>{ p.style.display='none'; p.style.height='0'; p.setAttribute('aria-hidden','true'); });
           gsapShow(hash);
         } else {
@@ -303,12 +147,10 @@
         }
 
       } else {
-        // no GSAP: wire fallback behaviour
         buttons.forEach(b => {
           b.addEventListener('click', () => {
             const id = b.dataset.target;
             if(activeId === id){
-              // collapse
               panels.forEach(p => { p.classList.remove('active'); p.setAttribute('aria-hidden','true'); });
               buttons.forEach(bt => bt.setAttribute('aria-pressed','false'));
               activeId = null;
@@ -316,10 +158,9 @@
               fallbackShow(id);
             }
           });
-          b.addEventListener('keyup', (e) => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); const id = b.dataset.target; if(activeId === id){ panels.forEach(p => { p.classList.remove('active'); p.setAttribute('aria-hidden','true'); }); buttons.forEach(bt => bt.setAttribute('aria-pressed','false')); activeId=null;} else { fallbackShow(id); } }});
+          b.addEventListener('keyup', (e) => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); const id = b.dataset.target; if(activeId === id){ panels.forEach(p => { p.classList.remove('active'); p.setAttribute('aria-hidden','true'); }); buttons.forEach(bt => bt.setAttribute('aria-pressed','false')); activeId = null; } else { fallbackShow(id); } }});
         });
 
-        // open from hash or default
         const hash = location.hash.replace('#','');
         if(hash && panels.some(p=>p.id===hash)) fallbackShow(hash); else fallbackShow('wedding');
       }
