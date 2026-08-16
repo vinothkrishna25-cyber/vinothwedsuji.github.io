@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <style>
     :root{
       --bg: #6b0f0f; /* maroon background */
@@ -79,7 +80,7 @@
     <section>
       <h2>Venue</h2>
       <p>Rani Mahal, Polur — Polur, Tiruvannamalai District, Tamil Nadu</p>
-      <p><a class="btn" href="https://www.google.com/maps/place/Rani+Mahal+Polur/@12.5122483,79.1380625,15z/data=!4m6!3m5!1s0x3bacd940a22dd3fb:0x725296a69b49b002!8m2!3d12.5147962!4d79.1271082!16s%5b...">View on map</a></p>
+      <p><a class="btn" href="https://www.google.com/maps/place/Rani+Mahal+Polur/@12.5122483,79.1380625,15z/data=!4m6!3m5!1s0x3bacd940a22dd3fb:0x725296a69b49b002!8m2!3d12.5147962!4d79.1271082!16s%[...]
     </section>
 
     <section>
@@ -88,9 +89,19 @@
       <p class="muted">For questions, email: <a href="mailto:vinothkrishna25@gmail.com">vinothkrishna25@gmail.com</a></p>
     </section>
 
-    <p style="margin-top:18px"><a href="index.html" class="btn" style="background:#d9b4a6">Back</a></p>
+    <p style="margin-top:18px"><a href="index.html" class="btn back-btn" style="background:#d9b4a6">Back</a></p>
   </main>
 
   <script src="script.js"></script>
+  <script>
+    // Add page exit animation when clicking back button
+    document.querySelector('.back-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.documentElement.style.animation = 'pageExit 0.4s ease-out forwards';
+      setTimeout(() => {
+        window.location.href = this.href;
+      }, 400);
+    });
+  </script>
 </body>
 </html>
