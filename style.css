@@ -44,6 +44,12 @@ body::before {
   padding: 48px 16px;
 }
 
+/* Page-specific hero images */
+body.next .hero{
+  /* Override the default .hero background for the second page */
+  background-image: url('assets/couple5.jpg');
+}
+
 .hero::before{
   content:'';
   position:absolute;
