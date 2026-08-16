@@ -1,6 +1,6 @@
 /* place in your main stylesheet, e.g. assets/css/main.css or styles.css */
 .groom-bg {
-  background-image: url("/assets/images/groom.jpg");
+background-image: url("/assets/groom.jpg");
   background-size: cover;           /* cover the area while keeping aspect ratio */
   background-position: center;      /* center the focal point */
   background-repeat: no-repeat;
