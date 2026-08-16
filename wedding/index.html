@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vinoth & Suji — Celebration</title>
+  <link rel="stylesheet" href="wedding.css" />
+  <meta name="description" content="Join Vinoth & Suji for their engagement & wedding celebrations" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="brand">Vinoth &amp; Suji</h1>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#story">Our Story</a>
+        <a href="#events">Events</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#rsvp">RSVP</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-inner container">
+        <h2>We're Engaged — and Celebrating!</h2>
+        <p class="date">June 12–13, 2026 • Chennai, India</p>
+        <p class="subtitle">Join us for a two-day celebration with family &amp; friends</p>
+        <a class="cta" href="#rsvp">RSVP</a>
+      </div>
+    </section>
+
+    <section id="story" class="container story">
+      <h3>Our Story</h3>
+      <p>
+        From that first hello to this special moment — we've grown together, laughed a lot,
+        and gathered memories. We'd be honored to have you with us as we celebrate the next chapter.
+      </p>
+      <div class="two-col">
+        <div>
+          <h4>How we met</h4>
+          <p>Through friends and a few coincidences — we found a connection and the rest felt easy.</p>
+        </div>
+        <div>
+          <h4>The proposal</h4>
+          <p>A quiet, heartfelt moment — just the two of us and a promise.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="events" class="container events">
+      <h3>Events</h3>
+      <div class="event-grid">
+        <article class="card">
+          <h4>Engagement Ceremony</h4>
+          <p class="event-meta">June 12, 2026 • 6:00 PM</p>
+          <p>Venue: Grand Hall, Chennai — intimate ceremony with close family.</p>
+        </article>
+        <article class="card">
+          <h4>Reception &amp; Dinner</h4>
+          <p class="event-meta">June 12, 2026 • 8:00 PM</p>
+          <p>Cocktails, dinner and dancing — dress: festive.</p>
+        </article>
+        <article class="card">
+          <h4>Blessings &amp; Brunch</h4>
+          <p class="event-meta">June 13, 2026 • 10:00 AM</p>
+          <p>Family brunch and traditional blessings to close our celebrations.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="gallery" class="container gallery">
+      <h3>Moments</h3>
+      <div class="grid">
+        <!-- Placeholder images; replace with your own in wedding/images/ -->
+        <img src="https://via.placeholder.com/800x600?text=Moment+1" alt="Moment 1" />
+        <img src="https://via.placeholder.com/800x600?text=Moment+2" alt="Moment 2" />
+        <img src="https://via.placeholder.com/800x600?text=Moment+3" alt="Moment 3" />
+      </div>
+    </section>
+
+    <section id="location" class="container location">
+      <h3>Location</h3>
+      <p>Grand Hall, Chennai — detailed address will be shared with guests.</p>
+      <div class="map">
+        <!-- Replace the src with a Google Maps embed for your venue when available -->
+        <iframe
+          src="https://www.google.com/maps?q=Chennai&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Map to venue"
+        ></iframe>
+      </div>
+    </section>
+
+    <section id="rsvp" class="container rsvp">
+      <h3>RSVP</h3>
+      <p>Please let us know if you can join — we appreciate a response by May 20, 2026.</p>
+
+      <form id="rsvpForm" class="form" novalidate>
+        <label>
+          Your name
+          <input type="text" name="name" id="name" required />
+        </label>
+
+        <label>
+          Email
+          <input type="email" name="email" id="email" required />
+        </label>
+
+        <label>
+          Attending
+          <select name="attending" id="attending" required>
+            <option value="">-- Select --</option>
+            <option value="both">Yes — I'll attend both days</option>
+            <option value="engagement">Yes — Engagement only</option>
+            <option value="reception">Yes — Reception only</option>
+            <option value="no">No — Sending love</option>
+          </select>
+        </label>
+
+        <label>
+          Guests (number)
+          <input type="number" name="guests" id="guests" min="0" max="10" value="0" />
+        </label>
+
+        <label>
+          Dietary needs (optional)
+          <input type="text" name="dietary" id="dietary" placeholder="e.g. vegetarian, gluten-free" />
+        </label>
+
+        <label>
+          Message (optional)
+          <textarea name="message" id="message" rows="3"></textarea>
+        </label>
+
+        <div class="form-actions">
+          <button type="submit" class="btn">Send RSVP</button>
+          <button type="button" id="clearBtn" class="btn ghost">Clear</button>
+        </div>
+
+        <p class="hint">We will email confirmations to the address you provide.</p>
+      </form>
+
+      <div id="thanks" class="thanks hidden">
+        <h4>Thank you!</h4>
+        <p>We've received your RSVP — we'll be in touch with details ❤️</p>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>Share the joy — <button id="shareBtn" class="link-btn">Share</button></p>
+        <small>© Vinoth &amp; Suji</small>
+      </div>
+    </footer>
+  </main>
+
+  <script src="wedding.js"></script>
+</body>
+</html>
