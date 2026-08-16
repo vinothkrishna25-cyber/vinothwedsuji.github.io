@@ -68,15 +68,17 @@ window.addEventListener('scroll', function () {
 
 // Navbar background on scroll
 const nav = document.querySelector('nav');
-window.addEventListener('scroll', function () {
-    if (window.scrollY > 50) {
-        nav.style.background = 'rgba(0, 0, 0, 0.95)';
-        nav.style.boxShadow = '0 4px 25px rgba(255, 215, 0, 0.3)';
-    } else {
-        nav.style.background = 'rgba(0, 0, 0, 0.9)';
-        nav.style.boxShadow = '0 2px 20px rgba(255, 215, 0, 0.2)';
-    }
-});
+if (nav) {
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 50) {
+            nav.style.background = 'rgba(0, 0, 0, 0.95)';
+            nav.style.boxShadow = '0 4px 25px rgba(255, 215, 0, 0.3)';
+        } else {
+            nav.style.background = 'rgba(0, 0, 0, 0.9)';
+            nav.style.boxShadow = '0 2px 20px rgba(255, 215, 0, 0.2)';
+        }
+    });
+}
 
 // Gallery hover effect with lightbox
 const galleryItems = document.querySelectorAll('.gallery-item');
@@ -189,6 +191,26 @@ if (!document.querySelector('style[data-animations]')) {
             from { opacity: 1; }
             to { opacity: 0; }
         }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     `;
     document.head.appendChild(style);
 }
+
+// Smooth transition between pages
+document.addEventListener('DOMContentLoaded', function() {
+    // Add fade-in animation to body on page load
+    document.body.style.animation = 'pageEnter 0.6s ease-out';
+});
