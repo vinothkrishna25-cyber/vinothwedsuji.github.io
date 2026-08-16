@@ -3,41 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Welcome — G. Krishnan &amp; P. Shankar</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="preload" href="assets/groom.jpg" as="image">
-  <link rel="stylesheet" href="style.css">
+  <title>Deployment notice</title>
+  <meta http-equiv="refresh" content="3;url=/wedding/" />
+  <style>body{font-family:Inter,system-ui,Arial;text-align:center;padding:4rem;color:#333}a{color:#b3385a;text-decoration:none}</style>
 </head>
-<body class="home">
-  <div class="hero">
-    <div class="hero-content">
-      <main class="card centered-card" role="main" aria-labelledby="welcomeTitle">
-        <h1 id="welcomeTitle">Welcome</h1>
-        <h2 class="subtitle">Celebrating the family function of</h2>
-        <p class="lead"><strong>G. KRISHNAN VALLI</strong> &amp; <strong>P. SHANKAR PUSHPA</strong></p>
-
-        <p class="welcome-note">We warmly invite family and friends to join us for an evening of blessings, laughter, and togetherness. Your presence is a cherished part of this celebration.</p>
-
-        <button type="button" id="openBtn" class="btn" aria-label="Open details page">Open</button>
-        <div class="small">Click Open to continue to the next page.</div>
-      </main>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
-  <script>
-    // Smooth page exit animation then navigate to next.html (timing kept consistent)
-    document.addEventListener('DOMContentLoaded', function(){
-      const openBtn = document.getElementById('openBtn');
-      if (openBtn) {
-        openBtn.addEventListener('click', function(){
-          document.documentElement.style.animation = 'pageExit 0.4s ease-out forwards';
-          setTimeout(() => { window.location.href = 'next.html'; }, 400);
-        });
-      }
-    });
-  </script>
+<body>
+  <h1>Publishing wedding site…</h1>
+  <p>You will be redirected shortly to the wedding page. If not, <a href="/wedding/">click here</a>.</p>
 </body>
 </html>
