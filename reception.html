@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Reception — G. Krishnan &amp; P. Shankar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="event reception">
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Reception</h1>
+      <p>12 Sep 2026 — 6:00 PM — Rani Mahal, Polur</p>
+      <nav style="margin-top:14px;">
+        <a class="btn" href="next.html" id="back-link">Back</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <section>
+      <h2>Details</h2>
+      <p>Join us for an evening of dinner, music, and celebration after the ceremony. Seating is reserved for family and invited guests. A photo booth will be available.</p>
+    </section>
+
+    <section>
+      <h2>Schedule</h2>
+      <ul>
+        <li>05:30 PM — Guest arrival & welcome drinks</li>
+        <li>06:00 PM — Reception begins / welcome address</li>
+        <li>08:00 PM — Dinner served</li>
+        <li>09:30 PM — Photo session & informal program</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Venue & Directions</h2>
+      <p>Rani Mahal, Polur — Tiruvannamalai District, Tamil Nadu</p>
+      <div style="margin-top:12px;">
+        <iframe
+          width="100%"
+          height="360"
+          style="border:0"
+          loading="lazy"
+          allowfullscreen
+          src="https://www.google.com/maps?q=12.5147962,79.1271082&z=15&output=embed"></iframe>
+      </div>
+      <p class="muted">If you have special dietary needs, please let us know when RSVPing.</p>
+    </section>
+
+    <section>
+      <h2>RSVP</h2>
+      <p>Please RSVP for the reception by emailing <a href="mailto:vinothkrishna25@gmail.com">vinothkrishna25@gmail.com</a> or calling <a href="tel:9629305663">9629305663</a>.</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const back = document.getElementById('back-link');
+      if(back){
+        back.addEventListener('click', function(e){
+          if (e.metaKey || e.ctrlKey || e.shiftKey || e.buttons === 2) return;
+          e.preventDefault();
+          const href = this.getAttribute('href');
+          document.documentElement.style.animation = 'pageExit 0.4s ease-out forwards';
+          setTimeout(()=> window.location.href = href, 400);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
