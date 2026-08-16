@@ -7,53 +7,96 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
   <style>
-    :root{
-      --bg: #6b0f0f; /* maroon background */
-      --card: rgba(255,255,255,0.95);
-      --accent: #ffdca3;
-      --text: #ffffff;
+    /* Use the couple image as the full-page background and remove maroon/white backgrounds */
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
-    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;background:var(--bg);color:var(--text)}
 
-    /* Hero with background image */
+    body {
+      /* full-page background image */
+      background-image: url('assets/couple5.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #ffffff; /* default text color for contrast */
+      position: relative;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+    }
+
+    /* dark overlay across the entire page to keep text readable */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* keep hero transparent (no separate maroon background) */
     .hero{
       min-height:320px;
       display:flex;
       align-items:center;
       justify-content:center;
       text-align:center;
-      color:var(--text);
-      background-image: url('assets/couple5.jpg');
-      background-size: cover;
-      background-position: center;
+      color:inherit;
       position:relative;
+      z-index: 1; /* above the page overlay */
+      padding: 48px 16px;
     }
-    /* overlay for better contrast */
+
+    /* hero overlay for slightly stronger contrast in the hero area */
     .hero::before{
       content:'';
       position:absolute;
       inset:0;
-      background:linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.45));
+      background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.35));
       z-index:0;
+      pointer-events:none;
     }
-    .hero-content{position:relative;z-index:1;padding:48px 16px}
-    #timer{font-family: 'Playfair Display', Georgia, serif;font-size:20px;display:inline-block;padding:12px 18px;background:rgba(255,255,255,0.08);border-radius:12px}
 
-    .container{max-width:760px;margin:24px auto;padding:24px;background:var(--card);border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,.25);color:#2b1f17}
+    .hero-content{position:relative;z-index:1}
+    #timer{font-family: 'Playfair Display', Georgia, serif;font-size:20px;display:inline-block;padding:12px 18px;background:rgba(255,255,255,0.06);border-radius:12px;color:#fff}
+
+    /* Make the container transparent so the background image shows through */
+    .container{
+      max-width:760px;
+      margin:24px auto;
+      padding:24px;
+      background: transparent; /* removed white card background */
+      border-radius:10px;
+      /* keep a subtle shadow to lift content slightly if desired */
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      color: #ffffff; /* ensure readable text */
+      position: relative;
+      z-index: 1; /* above the page overlay */
+      backdrop-filter: none;
+    }
+
     h1{margin-top:0;font-family:'Playfair Display', Georgia, serif;font-size:28px}
     h2{font-family:'Playfair Display', Georgia, serif}
-    p{font-size:16px;line-height:1.5}
-    .btn{display:inline-block;padding:10px 16px;background:var(--accent);color:#3b2a1a;border-radius:8px;text-decoration:none;font-weight:600}
-    .muted{color:#2b1f17;margin-top:12px}
+    p{font-size:16px;line-height:1.5;color:rgba(255,255,255,0.95)}
+    .btn{display:inline-block;padding:10px 16px;background:#ffdca3;color:#3b2a1a;border-radius:8px;text-decoration:none;font-weight:600}
+    .muted{color:rgba(255,255,255,0.85);margin-top:12px}
     section + section{margin-top:18px}
     ul{margin:8px 0 0 20px;padding:0}
     a.btn:focus, .btn:focus {outline:3px solid rgba(255,220,163,0.5); outline-offset:3px}
+
     @media (prefers-color-scheme: dark) {
-      .container {background: rgba(255,255,255,0.06); color: #fff}
-      .muted {color:#f3e9e9}
+      /* keep behavior the same; page already darkened by overlay */
     }
+
+    /* Page enter/exit animations (kept from original file) */
+    @keyframes pageEnter { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0);} }
+    @keyframes pageExit  { from { opacity: 1; transform: translateY(0);} to { opacity: 0; transform: translateY(-10px);} }
+    html, body { animation: pageEnter 0.6s ease-out; }
+
   </style>
 </head>
 <body>
@@ -80,13 +123,13 @@
     <section>
       <h2>Venue</h2>
       <p>Rani Mahal, Polur — Polur, Tiruvannamalai District, Tamil Nadu</p>
-      <p><a class="btn" href="https://www.google.com/maps/place/Rani+Mahal+Polur/@12.5122483,79.1380625,15z/data=!4m6!3m5!1s0x3bacd940a22dd3fb:0x725296a69b49b002!8m2!3d12.5147962!4d79.1271082!16s%[...]
+      <p><a class="btn" href="https://www.google.com/maps/place/Rani+Mahal+Polur/@12.5122483,79.1380625,15z/data=!4m6!3m5!1s0x3bacd940a22dd3fb:0x725296a69b49b002!8m2!3d12.5147962!4d79.1271082">Open Map</a></p>
     </section>
 
     <section>
       <h2>Contact</h2>
-      <p class="muted">For Contact, Ph: <a href="tel:9629305663">9629305663</a></p>
-      <p class="muted">For questions, email: <a href="mailto:vinothkrishna25@gmail.com">vinothkrishna25@gmail.com</a></p>
+      <p class="muted">For Contact, Ph: <a href="tel:9629305663" style="color:inherit; text-decoration:underline;">9629305663</a></p>
+      <p class="muted">For questions, email: <a href="mailto:vinothkrishna25@gmail.com" style="color:inherit; text-decoration:underline;">vinothkrishna25@gmail.com</a></p>
     </section>
 
     <p style="margin-top:18px"><a href="index.html" class="btn back-btn" style="background:#d9b4a6">Back</a></p>
