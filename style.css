@@ -9,10 +9,7 @@ html, body {
 }
 
 body {
-  background-image: url('assets/couple5.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  /* background-image moved to .hero to enable parallax on the hero area */
   color: #ffffff;
   position: relative;
   -webkit-font-smoothing: antialiased;
@@ -30,9 +27,13 @@ body::before {
   pointer-events: none;
 }
 
-/* Hero */
+/* Hero (now holds the background image so parallax works) */
 .hero{
-  min-height:320px;
+  background-image: url('assets/couple5.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; /* cover the viewport like before */
   display:flex;
   align-items:center;
   justify-content:center;
