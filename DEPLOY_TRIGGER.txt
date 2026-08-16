@@ -1,0 +1,4 @@
+Trigger GitHub Pages rebuild
+
+This file was added to trigger a Pages rebuild after promoting the wedding site to the repository root.
+Timestamp: 2026-08-16T08:18:00Z
