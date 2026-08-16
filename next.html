@@ -18,9 +18,9 @@
       <p style="margin:8px 0 18px;">Welcome — details about the family function are below. We look forward to celebrating with you.</p>
 
       <div class="btn-group" role="tablist" aria-label="Event details tabs">
-        <button class="detail-btn" data-target="wedding" aria-pressed="false">Wedding</button>
-        <button class="detail-btn" data-target="reception" aria-pressed="false">Reception</button>
-        <button class="detail-btn" data-target="engagement" aria-pressed="false">Engagement</button>
+        <button type="button" class="detail-btn" data-target="wedding" aria-pressed="false">Wedding</button>
+        <button type="button" class="detail-btn" data-target="reception" aria-pressed="false">Reception</button>
+        <button type="button" class="detail-btn" data-target="engagement" aria-pressed="false">Engagement</button>
       </div>
 
       <div id="timer" aria-live="polite" style="display:block;margin-top:16px;">Loading countdown...</div>
@@ -74,98 +74,100 @@
   </main>
 
   <script src="script.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-+8xqI2r2oGmV0q5E1L4oQK6qz4kQ9fL5rXq8R2zQGmYQm6m4F5jv6k1l2H3b7p9Z0Y8h3+Q1Z2X3Y4Z5A6B7C==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-+8xqI2r2oGmV0q5E1L4oQK6qz4kQ9fL5rXq8R2zQGmYQm6m4F5jv6k1l2H3b7p9Z0Y8h3+Q1Z2X3Y4Z5A6B7C==" crossorigin="anonymous"></script>
   <script>
-    (function(){
-      const buttons = Array.from(document.querySelectorAll('.detail-btn'));
-      const panels = Array.from(document.querySelectorAll('.details-panel'));
-      let activeId = null;
+    document.addEventListener('DOMContentLoaded', function(){
+      (function(){
+        const buttons = Array.from(document.querySelectorAll('.detail-btn'));
+        const panels = Array.from(document.querySelectorAll('.details-panel'));
+        let activeId = null;
 
-      function fallbackShow(id){
-        panels.forEach(p => {
-          if(p.id === id){
-            p.classList.add('active'); p.setAttribute('aria-hidden','false');
-          } else { p.classList.remove('active'); p.setAttribute('aria-hidden','true'); }
-        });
-        buttons.forEach(b => b.setAttribute('aria-pressed', b.dataset.target === id ? 'true' : 'false'));
-        activeId = id;
-      }
-
-      const useGSAP = typeof window.gsap !== 'undefined' && typeof window.gsap.to === 'function';
-
-      if(useGSAP){
-        panels.forEach(p => p.classList.add('gsap-ready'));
-
-        function gsapShow(id){
-          if(activeId === id){
-            const cur = document.getElementById(activeId);
-            if(cur){
-              gsap.to(cur, {height:0, opacity:0, y:-8, duration:0.45, ease:'power2.inOut', onComplete(){ cur.style.display='none'; cur.setAttribute('aria-hidden','true'); }});
-              buttons.forEach(b => b.setAttribute('aria-pressed','false'));
-              activeId = null;
-            }
-            return;
-          }
-
-          const newPanel = document.getElementById(id);
-          const oldPanel = activeId ? document.getElementById(activeId) : null;
-
-          if(oldPanel){
-            gsap.to(oldPanel, {height:0, opacity:0, y:-8, duration:0.35, ease:'power2.inOut', onComplete(){ oldPanel.style.display='none'; oldPanel.setAttribute('aria-hidden','true'); }});
-          }
-
-          newPanel.style.display = 'block';
-          newPanel.style.height = 'auto';
-          const autoH = newPanel.clientHeight + 'px';
-          newPanel.style.height = '0px';
-          newPanel.setAttribute('aria-hidden','false');
-
-          gsap.to(newPanel, {height: autoH, duration: 0.6, ease: 'power3.out'});
-          gsap.fromTo(newPanel, {opacity:0, y:10}, {opacity:1, y:0, duration:0.5, ease:'power3.out', delay:0.06});
-
-          const children = Array.from(newPanel.children);
-          gsap.fromTo(children, {opacity:0, y:6}, {opacity:1, y:0, duration:0.45, stagger:0.06, delay:0.12, ease:'power3.out'});
-
+        function fallbackShow(id){
+          panels.forEach(p => {
+            if(p.id === id){
+              p.classList.add('active'); p.setAttribute('aria-hidden','false');
+            } else { p.classList.remove('active'); p.setAttribute('aria-hidden','true'); }
+          });
           buttons.forEach(b => b.setAttribute('aria-pressed', b.dataset.target === id ? 'true' : 'false'));
           activeId = id;
-
-          setTimeout(() => { newPanel.style.height = 'auto'; }, 700);
         }
 
-        buttons.forEach(b => {
-          b.addEventListener('click', () => gsapShow(b.dataset.target));
-          b.addEventListener('keyup', (e) => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); gsapShow(b.dataset.target); }});
-        });
+        const useGSAP = typeof window.gsap !== 'undefined' && typeof window.gsap.to === 'function';
 
-        const hash = location.hash.replace('#','');
-        if(hash && panels.some(p=>p.id===hash)){
-          panels.forEach(p=>{ p.style.display='none'; p.style.height='0'; p.setAttribute('aria-hidden','true'); });
-          gsapShow(hash);
-        } else {
-          panels.forEach(p=>{ p.style.display='none'; p.style.height='0'; p.setAttribute('aria-hidden','true'); });
-          gsapShow('wedding');
-        }
+        if(useGSAP){
+          panels.forEach(p => p.classList.add('gsap-ready'));
 
-      } else {
-        buttons.forEach(b => {
-          b.addEventListener('click', () => {
-            const id = b.dataset.target;
+          function gsapShow(id){
             if(activeId === id){
-              panels.forEach(p => { p.classList.remove('active'); p.setAttribute('aria-hidden','true'); });
-              buttons.forEach(bt => bt.setAttribute('aria-pressed','false'));
-              activeId = null;
-            } else {
-              fallbackShow(id);
+              const cur = document.getElementById(activeId);
+              if(cur){
+                gsap.to(cur, {height:0, opacity:0, y:-8, duration:0.45, ease:'power2.inOut', onComplete(){ cur.style.display='none'; cur.setAttribute('aria-hidden','true'); }});
+                buttons.forEach(b => b.setAttribute('aria-pressed','false'));
+                activeId = null;
+              }
+              return;
             }
+
+            const newPanel = document.getElementById(id);
+            const oldPanel = activeId ? document.getElementById(activeId) : null;
+
+            if(oldPanel){
+              gsap.to(oldPanel, {height:0, opacity:0, y:-8, duration:0.35, ease:'power2.inOut', onComplete(){ oldPanel.style.display='none'; oldPanel.setAttribute('aria-hidden','true'); }});
+            }
+
+            newPanel.style.display = 'block';
+            newPanel.style.height = 'auto';
+            const autoH = newPanel.clientHeight + 'px';
+            newPanel.style.height = '0px';
+            newPanel.setAttribute('aria-hidden','false');
+
+            gsap.to(newPanel, {height: autoH, duration: 0.6, ease: 'power3.out'});
+            gsap.fromTo(newPanel, {opacity:0, y:10}, {opacity:1, y:0, duration:0.5, ease:'power3.out', delay:0.06});
+
+            const children = Array.from(newPanel.children);
+            gsap.fromTo(children, {opacity:0, y:6}, {opacity:1, y:0, duration:0.45, stagger:0.06, delay:0.12, ease:'power3.out'});
+
+            buttons.forEach(b => b.setAttribute('aria-pressed', b.dataset.target === id ? 'true' : 'false'));
+            activeId = id;
+
+            setTimeout(() => { newPanel.style.height = 'auto'; }, 700);
+          }
+
+          buttons.forEach(b => {
+            b.addEventListener('click', () => gsapShow(b.dataset.target));
+            b.addEventListener('keyup', (e) => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); gsapShow(b.dataset.target); }});
           });
-          b.addEventListener('keyup', (e) => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); const id = b.dataset.target; if(activeId === id){ panels.forEach(p => { p.classList.remo[...]
-        });
 
-        const hash = location.hash.replace('#','');
-        if(hash && panels.some(p=>p.id===hash)) fallbackShow(hash); else fallbackShow('wedding');
-      }
+          const hash = location.hash.replace('#','');
+          if(hash && panels.some(p=>p.id===hash)){
+            panels.forEach(p=>{ p.style.display='none'; p.style.height='0'; p.setAttribute('aria-hidden','true'); });
+            gsapShow(hash);
+          } else {
+            panels.forEach(p=>{ p.style.display='none'; p.style.height='0'; p.setAttribute('aria-hidden','true'); });
+            gsapShow('wedding');
+          }
 
-    })();
+        } else {
+          buttons.forEach(b => {
+            b.addEventListener('click', () => {
+              const id = b.dataset.target;
+              if(activeId === id){
+                panels.forEach(p => { p.classList.remove('active'); p.setAttribute('aria-hidden','true'); });
+                buttons.forEach(bt => bt.setAttribute('aria-pressed','false'));
+                activeId = null;
+              } else {
+                fallbackShow(id);
+              }
+            });
+            b.addEventListener('keyup', (e) => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); const id = b.dataset.target; if(activeId === id){ panels.forEach(p => { p.classList.remove('active'); p.setAttribute('aria-hidden','true'); }); buttons.forEach(bt => bt.setAttribute('aria-pressed','false')); activeId = null; } else { fallbackShow(id); } }});
+          });
+
+          const hash = location.hash.replace('#','');
+          if(hash && panels.some(p=>p.id===hash)) fallbackShow(hash); else fallbackShow('wedding');
+        }
+
+      })();
+    });
   </script>
 </body>
 </html>
