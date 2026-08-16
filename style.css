@@ -29,7 +29,7 @@ body::before {
 
 /* Hero (now holds the background image so parallax works) */
 .hero{
-  background-image: url('assets/couple5.jpg');
+  background-image: url('assets/groom.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -89,6 +89,25 @@ body::before {
   position: relative;
   z-index: 1;
   backdrop-filter: none;
+}
+
+/* centered card for the front page */
+.centered-card {
+  max-width: 720px;
+  width: 100%;
+  padding: 36px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.02);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+  text-align: center;
+  color: #fff;
+  margin: 0 auto;
+  backdrop-filter: blur(2px);
+}
+
+@media (max-width: 540px) {
+  .centered-card { padding: 20px; border-radius: 10px; }
+  h1 { font-size: 28px; }
 }
 
 /* Details panels (fallback CSS-only animation) */
@@ -157,6 +176,7 @@ section { animation: pageEnter 0.6s ease-out; transition: opacity 0.3s ease; }
 /* Hero and text transitions */
 .hero { animation: pageEnter 0.8s ease-out; transition: all 0.3s ease; }
 h1, h2, h3, p, span { animation: pageEnter 0.6s ease-out; transition: all 0.3s ease; }
+
 
 a { transition: color 0.3s ease, opacity 0.3s ease; }
 a:hover { opacity: 0.85; }
