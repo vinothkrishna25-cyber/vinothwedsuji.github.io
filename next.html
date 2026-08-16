@@ -12,7 +12,7 @@
 </head>
 <body>
   <!-- Hero with countdown -->
-  <div class="hero">
+  <div class="hero" style="background-image: url('assets/couple5.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <div class="hero-content">
       <h1 style="margin:0;font-size:32px;">G. Krishnan &amp; P. Shankar — Family Function</h1>
       <p style="margin:8px 0 18px;">Welcome — details about the family function are below. We look forward to celebrating with you.</p>
@@ -62,7 +62,7 @@
     <section>
       <h2>Venue</h2>
       <p>Rani Mahal, Polur — Polur, Tiruvannamalai District, Tamil Nadu</p>
-      <p><a class="btn" href="https://www.google.com/maps/place/Rani+Mahal+Polur/@12.5122483,79.1380625,15z/data=!4m6!3m5!1s0x3bacd940a22dd3fb:0x725296a69b49b002!8m2!3d12.5147962!4d79.1271082">Open map</a></p>
+      <p><a class="btn" href="https://www.google.com/maps/place/Rani+Mahal+Polur/@12.5122483,79.1380625,15z/data=!4m6!3m5!1s0x3bacd940a22dd3fb:0x725296a69b49b002!8m2!3d12.5147962!4d79.1271082">Open in Maps</a></p>
     </section>
 
     <section>
@@ -158,7 +158,7 @@
               fallbackShow(id);
             }
           });
-          b.addEventListener('keyup', (e) => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); const id = b.dataset.target; if(activeId === id){ panels.forEach(p => { p.classList.remove('active'); p.setAttribute('aria-hidden','true'); }); buttons.forEach(bt => bt.setAttribute('aria-pressed','false')); activeId = null; } else { fallbackShow(id); } }});
+          b.addEventListener('keyup', (e) => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); const id = b.dataset.target; if(activeId === id){ panels.forEach(p => { p.classList.remo[...]
         });
 
         const hash = location.hash.replace('#','');
