@@ -46,8 +46,8 @@ body::before {
 
 /* Page-specific hero images */
 body.next .hero{
-  /* Override the default .hero background for the second page */
-  background-image: url('assets/couple5.jpg');
+  /* Override the default .bg background for the second page */
+  background-image: url('assets/bg.jpg');
 }
 
 .hero::before{
