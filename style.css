@@ -30,8 +30,8 @@ body::before {
 /* Hero (now holds the background image so parallax works) */
 .hero{
   background-image: url('assets/groom.jpg');
-  background-size: cover;
-  background-position: center;
+  background-size: cover;           /* fill viewport while preserving aspect ratio */
+  background-position: center top;  /* favor the upper part of the image so subject stays visible */
   background-repeat: no-repeat;
   min-height: 100vh; /* cover the viewport like before */
   display:flex;
@@ -42,6 +42,17 @@ body::before {
   position:relative;
   z-index: 1;
   padding: 48px 16px;
+}
+
+/* Responsive tweaks to keep the important part of the photo visible on small screens */
+@media (max-width: 1024px) {
+  .hero { background-position: center 15%; }
+}
+@media (max-width: 768px) {
+  .hero { background-position: center 25%; }
+}
+@media (max-width: 420px) {
+  .hero { background-position: center 35%; }
 }
 
 /* Page-specific hero images */
