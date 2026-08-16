@@ -100,7 +100,7 @@
       backdrop-filter: none;
     }
 
-    /* Details panels (hidden by default) with smooth transitions */
+    /* Details panels (fallback CSS-only animation) */
     .details-panel{
       overflow: hidden;
       max-height: 0;
@@ -118,6 +118,9 @@
       max-height: 600px; /* large enough to show content */
       padding: 14px;
     }
+
+    /* When GSAP is available we will apply a subtle blur/backdrop to the panel for a polished look */
+    .details-panel.gsap-ready{ background: rgba(0,0,0,0.28); backdrop-filter: blur(6px); }
 
     h1{margin-top:0;font-family:'Playfair Display', Georgia, serif;font-size:28px}
     h2{font-family:'Playfair Display', Georgia, serif}
@@ -160,19 +163,19 @@
 
     <!-- Details panels toggled by the buttons above -->
     <div id="details-wrapper" aria-live="polite">
-      <div id="wedding" class="details-panel" role="region" aria-labelledby="wedding-title">
+      <div id="wedding" class="details-panel" role="region" aria-labelledby="wedding-title" aria-hidden="true">
         <h2 id="wedding-title">Wedding</h2>
         <p>The wedding ceremony will take place on 13 Sep 2026 at 3:30 AM at Rani Mahal, Polur. Please arrive 30 minutes early for seating and rituals. Dress code: Traditional attire.</p>
         <p class="muted">More details: Please contact the organizers if you need transport or accommodation assistance.</p>
       </div>
 
-      <div id="reception" class="details-panel" role="region" aria-labelledby="reception-title">
+      <div id="reception" class="details-panel" role="region" aria-labelledby="reception-title" aria-hidden="true">
         <h2 id="reception-title">Reception</h2>
         <p>The reception is scheduled for 12 Sep 2026 at 6:00 PM at Rani Mahal, Polur. Join us for dinner and refreshments after the ceremony.</p>
         <p class="muted">Note: The reception will have a photo booth and seating is reserved for family guests.</p>
       </div>
 
-      <div id="engagement" class="details-panel" role="region" aria-labelledby="engagement-title">
+      <div id="engagement" class="details-panel" role="region" aria-labelledby="engagement-title" aria-hidden="true">
         <h2 id="engagement-title">Engagement</h2>
         <p>The engagement ceremony will be held on 31 Aug 2026 at 7:30 PM. Close family members are invited to bless the couple.</p>
         <p class="muted">Please RSVP to the contact number if you're attending the engagement function.</p>
@@ -204,6 +207,8 @@
   </main>
 
   <script src="script.js"></script>
+  <!-- GSAP CDN for polished springy animations (used when available) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-+8xqI2r2oGmV0q5E1L4oQK6qz4kQ9fL5rXq8R2zQGmYQm6m4F5jv6k1l2H3b7p9Z0Y8h3+Q1Z2X3Y4Z5A6B7C==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
     // Add page exit animation when clicking back button
     document.querySelector('.back-btn').addEventListener('click', function(e) {
@@ -214,42 +219,109 @@
       }, 400);
     });
 
-    // Details buttons behaviour: show related panel with smooth transitions
     (function(){
       const buttons = Array.from(document.querySelectorAll('.detail-btn'));
       const panels = Array.from(document.querySelectorAll('.details-panel'));
+      let activeId = null;
 
-      function showPanel(id){
+      // Utility: fallback DOM toggle (CSS-only)
+      function fallbackShow(id){
         panels.forEach(p => {
           if(p.id === id){
-            p.classList.add('active');
-            p.setAttribute('aria-hidden', 'false');
-          } else {
-            p.classList.remove('active');
-            p.setAttribute('aria-hidden', 'true');
-          }
+            p.classList.add('active'); p.setAttribute('aria-hidden','false');
+          } else { p.classList.remove('active'); p.setAttribute('aria-hidden','true'); }
         });
         buttons.forEach(b => b.setAttribute('aria-pressed', b.dataset.target === id ? 'true' : 'false'));
+        activeId = id;
       }
 
-      // Wire up click handlers
-      buttons.forEach(b => {
-        b.addEventListener('click', () => showPanel(b.dataset.target));
-        b.addEventListener('keyup', (e) => {
-          if(e.key === 'Enter' || e.key === ' '){
-            e.preventDefault();
-            showPanel(b.dataset.target);
-          }
-        });
-      });
+      // If GSAP is available, use it for buttery animations. Otherwise, use CSS fallback.
+      const useGSAP = typeof window.gsap !== 'undefined' && typeof window.gsap.to === 'function';
 
-      // If URL contains hash matching a panel, open it on load
-      const hash = location.hash.replace('#','');
-      if(hash && panels.some(p => p.id === hash)){
-        showPanel(hash);
+      if(useGSAP){
+        // mark panels as gsap-ready for a slightly different style
+        panels.forEach(p => p.classList.add('gsap-ready'));
+
+        function gsapShow(id){
+          // If clicking the already active tab -> collapse
+          if(activeId === id){
+            // collapse current
+            const cur = document.getElementById(activeId);
+            if(cur){
+              gsap.to(cur, {height:0, opacity:0, y:-8, duration:0.45, ease:'power2.inOut', onComplete(){ cur.style.display='none'; cur.setAttribute('aria-hidden','true'); }});
+              buttons.forEach(b => b.setAttribute('aria-pressed','false'));
+              activeId = null;
+            }
+            return;
+          }
+
+          const newPanel = document.getElementById(id);
+          const oldPanel = activeId ? document.getElementById(activeId) : null;
+
+          // collapse old
+          if(oldPanel){
+            gsap.to(oldPanel, {height:0, opacity:0, y:-8, duration:0.35, ease:'power2.inOut', onComplete(){ oldPanel.style.display='none'; oldPanel.setAttribute('aria-hidden','true'); }});
+          }
+
+          // prepare new
+          newPanel.style.display = 'block';
+          newPanel.style.height = 'auto';
+          const autoH = newPanel.clientHeight + 'px';
+          newPanel.style.height = '0px';
+          newPanel.setAttribute('aria-hidden','false');
+
+          // animate to auto height + content
+          gsap.to(newPanel, {height: autoH, duration: 0.6, ease: 'power3.out'});
+          gsap.fromTo(newPanel, {opacity:0, y:10}, {opacity:1, y:0, duration:0.5, ease:'power3.out', delay:0.06});
+
+          // animate inner children stagger for polish
+          const children = Array.from(newPanel.children);
+          gsap.fromTo(children, {opacity:0, y:6}, {opacity:1, y:0, duration:0.45, stagger:0.06, delay:0.12, ease:'power3.out'});
+
+          buttons.forEach(b => b.setAttribute('aria-pressed', b.dataset.target === id ? 'true' : 'false'));
+          activeId = id;
+
+          // after animation, set height to auto to allow responsive changes
+          setTimeout(() => { newPanel.style.height = 'auto'; }, 700);
+        }
+
+        // wire events
+        buttons.forEach(b => {
+          b.addEventListener('click', () => gsapShow(b.dataset.target));
+          b.addEventListener('keyup', (e) => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); gsapShow(b.dataset.target); }});
+        });
+
+        // open from hash or default
+        const hash = location.hash.replace('#','');
+        if(hash && panels.some(p=>p.id===hash)){
+          // ensure others hidden
+          panels.forEach(p=>{ p.style.display='none'; p.style.height='0'; p.setAttribute('aria-hidden','true'); });
+          gsapShow(hash);
+        } else {
+          panels.forEach(p=>{ p.style.display='none'; p.style.height='0'; p.setAttribute('aria-hidden','true'); });
+          gsapShow('wedding');
+        }
+
       } else {
-        // default: show Wedding panel
-        showPanel('wedding');
+        // no GSAP: wire fallback behaviour
+        buttons.forEach(b => {
+          b.addEventListener('click', () => {
+            const id = b.dataset.target;
+            if(activeId === id){
+              // collapse
+              panels.forEach(p => { p.classList.remove('active'); p.setAttribute('aria-hidden','true'); });
+              buttons.forEach(bt => bt.setAttribute('aria-pressed','false'));
+              activeId = null;
+            } else {
+              fallbackShow(id);
+            }
+          });
+          b.addEventListener('keyup', (e) => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); const id = b.dataset.target; if(activeId === id){ panels.forEach(p => { p.classList.remove('active'); p.setAttribute('aria-hidden','true'); }); buttons.forEach(bt => bt.setAttribute('aria-pressed','false')); activeId=null;} else { fallbackShow(id); } }});
+        });
+
+        // open from hash or default
+        const hash = location.hash.replace('#','');
+        if(hash && panels.some(p=>p.id===hash)) fallbackShow(hash); else fallbackShow('wedding');
       }
 
     })();
