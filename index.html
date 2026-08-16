@@ -20,7 +20,7 @@
 
         <p class="welcome-note">We warmly invite family and friends to join us for an evening of blessings, laughter, and togetherness. Your presence is a cherished part of this celebration.</p>
 
-        <button id="openBtn" class="btn" aria-label="Open details page">Open</button>
+        <button type="button" id="openBtn" class="btn" aria-label="Open details page">Open</button>
         <div class="small">Click Open to continue to the next page.</div>
       </main>
     </div>
@@ -29,9 +29,14 @@
   <script src="script.js"></script>
   <script>
     // Smooth page exit animation then navigate to next.html (timing kept consistent)
-    document.getElementById('openBtn').addEventListener('click', function(){
-      document.documentElement.style.animation = 'pageExit 0.4s ease-out forwards';
-      setTimeout(() => { window.location.href = 'next.html'; }, 400);
+    document.addEventListener('DOMContentLoaded', function(){
+      const openBtn = document.getElementById('openBtn');
+      if (openBtn) {
+        openBtn.addEventListener('click', function(){
+          document.documentElement.style.animation = 'pageExit 0.4s ease-out forwards';
+          setTimeout(() => { window.location.href = 'next.html'; }, 400);
+        });
+      }
     });
   </script>
 </body>
