@@ -3,50 +3,79 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Welcome </title>
- <title> G. Krishnan & P. Shankar</title>
- <title>Family Function</title>
-   <!-- Fonts -->
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <title>Welcome — G. Krishnan & P. Shankar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    html, body { height:100%; margin:0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
 
-  <link rel="stylesheet" href="style.css">
-   <style>
-     :root{--bg:#e6f0ff;--card:#fff;--accent:#007bff}
-     html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial}
-     body{display:flex;align-items:center;justify-content:center;background:var(--bg);padding:24px}
-     .card{background:var(--card);padding:36px;border-radius:12px;box-shadow:0 8px 30px rgba(15,15,15,.08);max-width:720px;text-align:center}
-     h1{margin:0 0 8px;font-size:36px;font-family:'Playfair Display', Georgia, serif;letter-spacing:0.6px;color:#102a43}
-     .lead{font-size:20px;color:#1f2937;margin-bottom:12px}
-     .welcome-note{font-style:italic;color:#334155;margin-bottom:18px;line-height:1.5}
-     p{margin:0 0 16px;color:#444;font-size:18px;line-height:1.4}
-     .btn{display:inline-block;background:var(--accent);color:#fff;padding:12px 20px;border-radius:8px;border:0;cursor:pointer;font-size:16px;text-decoration:none}
-     .small{color:#666;font-size:14px;margin-top:12px}
-     .btn:focus{outline:3px solid rgba(0,123,255,0.25);outline-offset:3px}
-   </style>
+    /* full-page background image to match next.html */
+    body {
+      background-image: url('assets/couple5.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #fff;
+      position: relative;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+
+    /* page overlay for readable text */
+    body::before { content:''; position:fixed; inset:0; background:rgba(0,0,0,0.35); z-index:0; pointer-events:none; }
+
+    .card {
+      background: transparent; /* show background image */
+      padding:36px;
+      border-radius:12px;
+      max-width:720px;
+      text-align:center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+      color: #fff;
+      position: relative; z-index:1;
+    }
+
+    h1 { margin:0 0 8px; font-size:36px; font-family:'Playfair Display', Georgia, serif; letter-spacing:0.6px; color: #ffdca3; }
+    .lead { font-size:20px; color: rgba(255,255,255,0.95); margin-bottom:12px }
+    .welcome-note{ font-style:italic; color:rgba(255,255,255,0.9); margin-bottom:18px; line-height:1.5 }
+
+    .btn { display:inline-block; background:#ffdca3; color:#3b2a1a; padding:12px 20px; border-radius:8px; border:0; cursor:pointer; font-size:16px; text-decoration:none }
+    .small{ color:rgba(255,255,255,0.85); font-size:14px; margin-top:12px }
+    .btn:focus{ outline:3px solid rgba(255,220,163,0.5); outline-offset:3px }
+
+    /* page enter/exit animations kept consistent with next.html */
+    @keyframes pageEnter { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0);} }
+    @keyframes pageExit  { from { opacity: 1; transform: translateY(0);} to { opacity: 0; transform: translateY(-10px);} }
+    html, body { animation: pageEnter 0.6s ease-out; }
+
+    /* small responsive tweaks */
+    @media (max-width:540px){ h1{font-size:28px} .card{padding:20px} }
+  </style>
 </head>
 <body>
-   <main class="card" role="main" aria-labelledby="welcomeTitle">
-     <h1 id="welcomeTitle">Welcome</h1>
-  <h2 id="welcomeTitle">Celebrating the family function of </h2>
-     <p class="lead"> <strong>G. KRISHNAN VALLI</strong> &amp; <strong>P. SHANKAR PUSHPA</strong></p>
+  <main class="card" role="main" aria-labelledby="welcomeTitle">
+    <h1 id="welcomeTitle">Welcome</h1>
+    <h2 style="margin:6px 0 14px;font-family:'Playfair Display', Georgia, serif;color:rgba(255,255,255,0.95);font-size:20px;">Celebrating the family function of</h2>
+    <p class="lead"><strong>G. KRISHNAN VALLI</strong> &amp; <strong>P. SHANKAR PUSHPA</strong></p>
 
-     <p class="welcome-note">We warmly invite family and friends to join us for an evening of blessings, laughter, and togetherness. Your presence is a cherished part of this celebration.</p>
+    <p class="welcome-note">We warmly invite family and friends to join us for an evening of blessings, laughter, and togetherness. Your presence is a cherished part of this celebration.</p>
 
-     <button id="openBtn" class="btn" aria-label="Open details page">Open</button>
-     <div class="small">Click Open to continue to the next page.</div>
-   </main>
+    <button id="openBtn" class="btn" aria-label="Open details page">Open</button>
+    <div class="small">Click Open to continue to the next page.</div>
+  </main>
 
-   <script>
-     // Reliable relative navigation to the details page
-     document.getElementById('openBtn').addEventListener('click', function(){
-       // Add page exit animation
-       document.documentElement.style.animation = 'pageExit 0.4s ease-out forwards';
-       setTimeout(() => {
-         window.location.href = 'next.html';
-       }, 400);
-     });
-   </script>
+  <script>
+    // Smooth page exit animation then navigate to next.html (same timing as next.html)
+    document.getElementById('openBtn').addEventListener('click', function(){
+      document.documentElement.style.animation = 'pageExit 0.4s ease-out forwards';
+      setTimeout(() => { window.location.href = 'next.html'; }, 400);
+    });
+  </script>
 </body>
 </html>
