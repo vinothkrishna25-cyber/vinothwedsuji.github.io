@@ -29,7 +29,7 @@ body::before {
 
 /* Hero (now holds the background image so parallax works) */
 .hero{
-  background-image: url('assets/groom.jpg');
+  background-image: url('assets/bg.jpg');
   background-size: cover;           /* fill viewport while preserving aspect ratio */
   background-position: center top;  /* favor the upper part of the image so subject stays visible */
   background-repeat: no-repeat;
@@ -164,7 +164,7 @@ a.btn:focus, .btn:focus {outline:3px solid rgba(255,220,163,0.5); outline-offset
 
 /* Original style.css content (groom-bg and transitions) */
 .groom-bg {
-  background-image: url("/assets/groom.jpg");
+  background-image: url("/assets/bg.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
