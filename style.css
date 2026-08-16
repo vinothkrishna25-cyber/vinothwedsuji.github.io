@@ -1,11 +1,15 @@
 /* place in your main stylesheet, e.g. assets/css/main.css or styles.css */
 .groom-bg {
-background-image: url("/assets/groom.jpg");
+  background-image: url("/assets/groom.jpg");
   background-size: cover;           /* cover the area while keeping aspect ratio */
   background-position: center;      /* center the focal point */
   background-repeat: no-repeat;
   background-attachment: scroll;    /* change to 'fixed' if you want parallax effect */
   min-height: 100vh;                /* if you want it to fill the viewport */
+  position: relative;               /* establish positioning context */
+  display: flex;                    /* center content inside */
+  align-items: center;
+  justify-content: center;
 }
 
 /* overlay to improve text contrast */
@@ -15,4 +19,22 @@ background-image: url("/assets/groom.jpg");
   inset: 0;
   background: rgba(0,0,0,0.35); /* tweak opacity/color for contrast */
   pointer-events: none;
+  z-index: 1;                       /* ensure overlay sits between bg and content */
+}
+
+/* ensure all text content appears above the overlay */
+.groom-bg > * {
+  position: relative;               /* place content above overlay */
+  z-index: 2;                       /* above the ::before pseudo-element */
+  color: white;                     /* set default text color for contrast */
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* optional: add text shadow for extra readability */
+}
+
+/* specific styling for common text elements */
+.groom-bg h1, .groom-bg h2, .groom-bg h3, 
+.groom-bg h4, .groom-bg h5, .groom-bg h6,
+.groom-bg p, .groom-bg span, .groom-bg div {
+  position: relative;
+  z-index: 2;
+  color: white;
 }
