@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vinoth & Suji — Engagement</title>
+  <link rel="stylesheet" href="engagement.css" />
+  <meta name="description" content="Join Vinoth & Suji — Engagement celebration" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="brand">Vinoth ♥ Suji</h1>
+      <nav>
+        <a href="#story">Story</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#rsvp">RSVP</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <h2>We're engaged!</h2>
+        <p class="date">June 12, 2026 • Celebration to follow</p>
+        <p class="location">Chennai • Venue details coming soon</p>
+        <a class="cta" href="#rsvp">RSVP</a>
+      </div>
+    </section>
+
+    <section id="story" class="container story">
+      <h3>Our Story</h3>
+      <p>
+        From chance meetings to life plans — we laughed, learned, and grew together.
+        We're excited to celebrate this moment with family and friends.
+      </p>
+      <div class="two-col">
+        <div>
+          <h4>How we met</h4>
+          <p>We met through mutual friends and the rest, as they say—was a lovely beginning.</p>
+        </div>
+        <div>
+          <h4>The proposal</h4>
+          <p>Simple, heartfelt and exactly as we are — intimate and full of joy.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="container gallery">
+      <h3>Moments</h3>
+      <div class="grid">
+        <!-- Replace src with your images -->
+        <img src="https://via.placeholder.com/600x400?text=Couple+1" alt="Couple 1" />
+        <img src="https://via.placeholder.com/600x400?text=Couple+2" alt="Couple 2" />
+        <img src="https://via.placeholder.com/600x400?text=Couple+3" alt="Couple 3" />
+      </div>
+    </section>
+
+    <section id="rsvp" class="container rsvp">
+      <h3>RSVP</h3>
+      <p>Please let us know if you can make it — we'd love to celebrate with you.</p>
+
+      <form id="rsvpForm" class="form" novalidate>
+        <label>
+          Your name
+          <input type="text" name="name" id="name" required />
+        </label>
+
+        <label>
+          Email
+          <input type="email" name="email" id="email" required />
+        </label>
+
+        <label>
+          Attending
+          <select name="attending" id="attending" required>
+            <option value="">-- Select --</option>
+            <option value="yes">Yes — I'll be there</option>
+            <option value="no">No — Sending love</option>
+            <option value="maybe">Maybe</option>
+          </select>
+        </label>
+
+        <label>
+          Message (optional)
+          <textarea name="message" id="message" rows="3"></textarea>
+        </label>
+
+        <div class="form-actions">
+          <button type="submit" class="btn">Send RSVP</button>
+          <button type="button" id="clearBtn" class="btn ghost">Clear</button>
+        </div>
+
+        <p class="hint">If you'd like a confirmation email, please ensure your address is correct.</p>
+      </form>
+
+      <div id="thanks" class="thanks hidden">
+        <h4>Thank you!</h4>
+        <p>We've received your RSVP. See you soon ❤️</p>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>Share the joy — <button id="shareBtn" class="link-btn">Share</button></p>
+        <small>© Vinoth & Suji</small>
+      </div>
+    </footer>
+  </main>
+
+  <script src="engagement.js"></script>
+</body>
+</html>
